@@ -3,7 +3,7 @@ package helper
 import (
 	"context"
 
-	discoveryv1 "k8s.io/api/discovery/v1"
+	discoveryv1 "k8s.io/api/discovery/v1beta1"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/client-go/util/retry"
 	"k8s.io/klog/v2"

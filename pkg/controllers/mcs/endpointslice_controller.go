@@ -3,7 +3,7 @@ package mcs
 import (
 	"context"
 
-	discoveryv1 "k8s.io/api/discovery/v1"
+	discoveryv1 "k8s.io/api/discovery/v1beta1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"

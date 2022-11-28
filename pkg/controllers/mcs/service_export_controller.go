@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"sync"
 
-	discoveryv1 "k8s.io/api/discovery/v1"
+	discoveryv1 "k8s.io/api/discovery/v1beta1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/api/meta"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

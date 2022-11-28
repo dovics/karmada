@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	discoveryv1 "k8s.io/api/discovery/v1"
+	discoveryv1 "k8s.io/api/discovery/v1beta1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/utils/pointer"
