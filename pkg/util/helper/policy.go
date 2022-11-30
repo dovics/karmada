@@ -3,7 +3,7 @@ package helper
 import (
 	"fmt"
 
-	discoveryv1 "k8s.io/api/discovery/v1"
+	discoveryv1beta1 "k8s.io/api/discovery/v1beta1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/sets"
 	"k8s.io/klog/v2"
@@ -126,12 +126,12 @@ func GenerateResourceSelectorForServiceImport(svcImport policyv1alpha1.ResourceS
 			Name:       derivedServiceName,
 		},
 		{
-			APIVersion: "discovery.k8s.io/v1",
+			APIVersion: "discovery.k8s.io/v1beta1",
 			Kind:       util.EndpointSliceKind,
 			Namespace:  svcImport.Namespace,
 			LabelSelector: &metav1.LabelSelector{
 				MatchLabels: map[string]string{
-					discoveryv1.LabelServiceName: derivedServiceName,
+					discoveryv1beta1.LabelServiceName: derivedServiceName,
 				},
 			},
 		},

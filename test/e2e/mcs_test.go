@@ -8,7 +8,7 @@ import (
 	"github.com/onsi/gomega"
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
-	discoveryv1 "k8s.io/api/discovery/v1"
+	discoveryv1beta1 "k8s.io/api/discovery/v1beta1"
 	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -240,8 +240,8 @@ var _ = ginkgo.Describe("Multi-Cluster Service testing", func() {
 
 		ginkgo.By(fmt.Sprintf("Wait Service(%s/%s)'s EndpointSlice exist in %s cluster", demoService.Namespace, demoService.Name, serviceExportClusterName), func() {
 			gomega.Eventually(func(g gomega.Gomega) (int, error) {
-				endpointSlices, err := exportClusterClient.DiscoveryV1().EndpointSlices(demoService.Namespace).List(context.TODO(), metav1.ListOptions{
-					LabelSelector: labels.Set{discoveryv1.LabelServiceName: demoService.Name}.AsSelector().String(),
+				endpointSlices, err := exportClusterClient.DiscoveryV1beta1().EndpointSlices(demoService.Namespace).List(context.TODO(), metav1.ListOptions{
+					LabelSelector: labels.Set{discoveryv1beta1.LabelServiceName: demoService.Name}.AsSelector().String(),
 				})
 				g.Expect(err).NotTo(gomega.HaveOccurred())
 
@@ -289,8 +289,8 @@ var _ = ginkgo.Describe("Multi-Cluster Service testing", func() {
 
 			ginkgo.By(fmt.Sprintf("Wait EndpointSlices collected to namespace(%s) in controller-plane", demoService.Namespace), func() {
 				gomega.Eventually(func(g gomega.Gomega) (int, error) {
-					endpointSlices, err := kubeClient.DiscoveryV1().EndpointSlices(demoService.Namespace).List(context.TODO(), metav1.ListOptions{
-						LabelSelector: labels.Set{discoveryv1.LabelServiceName: names.GenerateDerivedServiceName(demoService.Name)}.AsSelector().String(),
+					endpointSlices, err := kubeClient.DiscoveryV1beta1().EndpointSlices(demoService.Namespace).List(context.TODO(), metav1.ListOptions{
+						LabelSelector: labels.Set{discoveryv1beta1.LabelServiceName: names.GenerateDerivedServiceName(demoService.Name)}.AsSelector().String(),
 					})
 					g.Expect(err).NotTo(gomega.HaveOccurred())
 
@@ -325,8 +325,8 @@ var _ = ginkgo.Describe("Multi-Cluster Service testing", func() {
 
 			ginkgo.By(fmt.Sprintf("Wait EndpointSlices have been imported to %s cluster", serviceImportClusterName), func() {
 				gomega.Eventually(func(g gomega.Gomega) (int, error) {
-					endpointSlices, err := importClusterClient.DiscoveryV1().EndpointSlices(demoService.Namespace).List(context.TODO(), metav1.ListOptions{
-						LabelSelector: labels.Set{discoveryv1.LabelServiceName: names.GenerateDerivedServiceName(demoService.Name)}.AsSelector().String(),
+					endpointSlices, err := importClusterClient.DiscoveryV1beta1().EndpointSlices(demoService.Namespace).List(context.TODO(), metav1.ListOptions{
+						LabelSelector: labels.Set{discoveryv1beta1.LabelServiceName: names.GenerateDerivedServiceName(demoService.Name)}.AsSelector().String(),
 					})
 					g.Expect(err).NotTo(gomega.HaveOccurred())
 
@@ -384,8 +384,8 @@ var _ = ginkgo.Describe("Multi-Cluster Service testing", func() {
 
 			ginkgo.By(fmt.Sprintf("Wait EndpointSlices collected to namespace(%s) in controller-plane", demoService.Namespace), func() {
 				gomega.Eventually(func(g gomega.Gomega) (int, error) {
-					endpointSlices, err := kubeClient.DiscoveryV1().EndpointSlices(demoService.Namespace).List(context.TODO(), metav1.ListOptions{
-						LabelSelector: labels.Set{discoveryv1.LabelServiceName: names.GenerateDerivedServiceName(demoService.Name)}.AsSelector().String(),
+					endpointSlices, err := kubeClient.DiscoveryV1beta1().EndpointSlices(demoService.Namespace).List(context.TODO(), metav1.ListOptions{
+						LabelSelector: labels.Set{discoveryv1beta1.LabelServiceName: names.GenerateDerivedServiceName(demoService.Name)}.AsSelector().String(),
 					})
 					g.Expect(err).NotTo(gomega.HaveOccurred())
 
@@ -406,8 +406,8 @@ var _ = ginkgo.Describe("Multi-Cluster Service testing", func() {
 
 			ginkgo.By(fmt.Sprintf("Wait EndpointSlice exist in %s cluster", serviceImportClusterName), func() {
 				gomega.Eventually(func(g gomega.Gomega) (int, error) {
-					endpointSlices, err := importClusterClient.DiscoveryV1().EndpointSlices(demoService.Namespace).List(context.TODO(), metav1.ListOptions{
-						LabelSelector: labels.Set{discoveryv1.LabelServiceName: names.GenerateDerivedServiceName(demoService.Name)}.AsSelector().String(),
+					endpointSlices, err := importClusterClient.DiscoveryV1beta1().EndpointSlices(demoService.Namespace).List(context.TODO(), metav1.ListOptions{
+						LabelSelector: labels.Set{discoveryv1beta1.LabelServiceName: names.GenerateDerivedServiceName(demoService.Name)}.AsSelector().String(),
 					})
 					g.Expect(err).NotTo(gomega.HaveOccurred())
 
@@ -424,8 +424,8 @@ var _ = ginkgo.Describe("Multi-Cluster Service testing", func() {
 
 			ginkgo.By(fmt.Sprintf("Wait EndpointSlice update in %s cluster", serviceImportClusterName), func() {
 				gomega.Eventually(func(g gomega.Gomega) (int, error) {
-					endpointSlices, err := importClusterClient.DiscoveryV1().EndpointSlices(demoService.Namespace).List(context.TODO(), metav1.ListOptions{
-						LabelSelector: labels.Set{discoveryv1.LabelServiceName: names.GenerateDerivedServiceName(demoService.Name)}.AsSelector().String(),
+					endpointSlices, err := importClusterClient.DiscoveryV1beta1().EndpointSlices(demoService.Namespace).List(context.TODO(), metav1.ListOptions{
+						LabelSelector: labels.Set{discoveryv1beta1.LabelServiceName: names.GenerateDerivedServiceName(demoService.Name)}.AsSelector().String(),
 					})
 					g.Expect(err).NotTo(gomega.HaveOccurred())
 
